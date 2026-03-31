@@ -1,0 +1,40 @@
+<section class="profile-page">
+    <div class="profile-card" *ngIf="user; else emptyState">
+        <h1>Thong tin ca nhan</h1>
+        <p class="subtitle">Du lieu duoc lay tu localStorage (key: current_user).</p>
+
+        <div class="profile-grid">
+            <div class="item">
+                <span class="label">ID</span>
+                <span class="value">{{ user.id }}</span>
+            </div>
+            <div class="item">
+                <span class="label">Username</span>
+                <span class="value">{{ user.username || '-' }}</span>
+            </div>
+            <div class="item">
+                <span class="label">Email</span>
+                <span class="value">{{ user.email || '-' }}</span>
+            </div>
+            <div class="item">
+                <span class="label">Role</span>
+                <span class="value">{{ user.role || '-' }}</span>
+            </div>
+            <div class="item">
+                <span class="label">Phone</span>
+                <span class="value">{{ user.phone || '-' }}</span>
+            </div>
+            <div class="item">
+                <span class="label">Created at</span>
+                <span class="value">{{ user.created_at || '-' }}</span>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #emptyState>
+        <div class="profile-card empty">
+            <h1>Thong tin ca nhan</h1>
+            <p>Khong tim thay du lieu nguoi dung trong localStorage.</p>
+        </div>
+    </ng-template>
+</section>

@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
+import { ProfileComponent } from './components/profile/profile.component';
 
 export const USER_ROUTES: Routes = [
-    // { path: '', component: UserListComponent, title: 'User Management' },
-    // { path: ':id', component: UserDetailComponent, title: 'User Details' }
+    { path: '', component: ProfileComponent, title: 'Ca nhan' }
 ];
