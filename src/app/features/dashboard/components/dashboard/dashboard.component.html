@@ -8,15 +8,12 @@
 
             <div class="masking-controls" *ngIf="isAdmin">
                 <label for="maskingMode">Masking mode</label>
-                <select
-                    id="maskingMode"
-                    [value]="selectedMaskingMode"
-                    [disabled]="maskUpdateLoading"
-                    (change)="onMaskingModeChange($any($event.target).value)"
-                >
+                <select id="maskingMode" [value]="selectedMaskingMode" [disabled]="maskUpdateLoading"
+                    (change)="onMaskingModeChange($any($event.target).value)">
                     <option *ngFor="let mode of maskingModes" [value]="mode">{{ mode }}</option>
                 </select>
-                <button mat-flat-button color="primary" type="button" [disabled]="maskUpdateLoading" (click)="applyMaskingMode()">
+                <button mat-flat-button color="primary" type="button" [disabled]="maskUpdateLoading"
+                    (click)="applyMaskingMode()">
                     {{ maskUpdateLoading ? 'Dang ap dung...' : 'Ap dung' }}
                 </button>
             </div>
