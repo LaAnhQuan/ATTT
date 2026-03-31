@@ -32,6 +32,7 @@ export class AuthService {
             tap(response => {
                 this.storageService.saveToken(response.access_token);
                 const user: User = { id: response.user_id, username: response.username, role: response.role, email: response.email };
+                this.storageService.saveUser(user);
                 this.currentUserSubject.next(user);
             }),
             catchError(error => {
@@ -53,10 +54,10 @@ export class AuthService {
     private checkInitialLoginState(): void {
         const token = this.storageService.getToken();
         if (token) {
-            // In a real app, you'd call an API to validate the token and get user info
-            // For now, we'll simulate it if the token exists.
-            // This part needs to be implemented properly with a backend endpoint.
-            // For example: this.http.get('/api/me').subscribe(user => this.currentUserSubject.next(user));
+            const storedUser = this.storageService.getUser();
+            if (storedUser) {
+                this.currentUserSubject.next(storedUser);
+            }
         }
     }
 }

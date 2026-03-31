@@ -1,0 +1,39 @@
+<section class="dashboard-page">
+    <div class="header">
+        <h1>Danh sach nhan vien</h1>
+        <p *ngIf="!loading && !errorMessage">Tong so nhan vien: <strong>{{ total }}</strong></p>
+    </div>
+
+    <div *ngIf="loading" class="state-message">Dang tai du lieu...</div>
+    <div *ngIf="errorMessage" class="state-message error">{{ errorMessage }}</div>
+
+    <div class="table-wrap" *ngIf="!loading && !errorMessage">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Password</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.phone }}</td>
+                    <td>{{ user.password || "-"}}</td>
+                    <td>{{ user.role }}</td>
+                </tr>
+                <tr *ngIf="users.length === 0">
+                    <td colspan="7" class="empty">Khong co du lieu nhan vien.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
