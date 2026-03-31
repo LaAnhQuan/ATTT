@@ -24,6 +24,70 @@
     color: #475569;
 }
 
+.decrypt-section {
+    margin-top: 18px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.decrypt-section label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: #334155;
+}
+
+.decrypt-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.decrypt-actions input {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+    outline: none;
+}
+
+.decrypt-actions input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.decrypt-actions button {
+    border: 0;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #fff;
+    padding: 0 14px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.decrypt-actions button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.decrypt-message {
+    margin: 8px 0 0;
+    font-size: 13px;
+}
+
+.decrypt-message.success {
+    color: #15803d;
+}
+
+.decrypt-message.error {
+    color: #dc2626;
+}
+
 .profile-grid {
     margin-top: 20px;
     display: grid;
@@ -58,6 +122,14 @@
 }
 
 @media (max-width: 768px) {
+    .decrypt-actions {
+        flex-direction: column;
+    }
+
+    .decrypt-actions button {
+        height: 40px;
+    }
+
     .profile-grid {
         grid-template-columns: 1fr;
     }

@@ -1,7 +1,30 @@
 <section class="profile-page">
+    <div class="profile-card" *ngIf="loading">
+        <h1>Thong tin ca nhan</h1>
+        <p>Dang tai du lieu...</p>
+    </div>
+
+    <div class="profile-card empty" *ngIf="!loading && errorMessage">
+        <h1>Thong tin ca nhan</h1>
+        <p>{{ errorMessage }}</p>
+    </div>
+
     <div class="profile-card" *ngIf="user; else emptyState">
         <h1>Thong tin ca nhan</h1>
-        <p class="subtitle">Du lieu duoc lay tu localStorage (key: current_user).</p>
+
+        <div class="decrypt-section" *ngIf="user.role === 'user'">
+            <label for="decryptionKey">Nhap key</label>
+            <div class="decrypt-actions">
+                <input id="decryptionKey" type="text" [(ngModel)]="decryptionKey" [disabled]="decryptLoading"
+                    placeholder="Nhap chuoi key de giai ma" />
+                <button type="button" (click)="onDecryptInfo()" [disabled]="decryptLoading">
+                    {{ decryptLoading ? 'Dang xu ly...' : 'Xac nhan' }}
+                </button>
+            </div>
+
+            <p class="decrypt-message success" *ngIf="decryptSuccessMessage">{{ decryptSuccessMessage }}</p>
+            <p class="decrypt-message error" *ngIf="decryptErrorMessage">{{ decryptErrorMessage }}</p>
+        </div>
 
         <div class="profile-grid">
             <div class="item">
@@ -32,9 +55,9 @@
     </div>
 
     <ng-template #emptyState>
-        <div class="profile-card empty">
+        <div class="profile-card empty" *ngIf="!loading && !errorMessage">
             <h1>Thong tin ca nhan</h1>
-            <p>Khong tim thay du lieu nguoi dung trong localStorage.</p>
+            <p>Khong co du lieu nguoi dung.</p>
         </div>
     </ng-template>
 </section>

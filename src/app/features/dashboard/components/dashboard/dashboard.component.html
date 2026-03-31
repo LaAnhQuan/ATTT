@@ -6,9 +6,27 @@
                 <p *ngIf="!loading && !errorMessage">Tong so nhan vien: <strong>{{ total }}</strong></p>
             </div>
 
+            <div class="masking-controls" *ngIf="isAdmin">
+                <label for="maskingMode">Masking mode</label>
+                <select
+                    id="maskingMode"
+                    [value]="selectedMaskingMode"
+                    [disabled]="maskUpdateLoading"
+                    (change)="onMaskingModeChange($any($event.target).value)"
+                >
+                    <option *ngFor="let mode of maskingModes" [value]="mode">{{ mode }}</option>
+                </select>
+                <button mat-flat-button color="primary" type="button" [disabled]="maskUpdateLoading" (click)="applyMaskingMode()">
+                    {{ maskUpdateLoading ? 'Dang ap dung...' : 'Ap dung' }}
+                </button>
+            </div>
+
         </div>
 
         <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+        <div *ngIf="maskUpdateError" class="state-message error">{{ maskUpdateError }}</div>
+        <div *ngIf="maskUpdateSuccess" class="state-message success">{{ maskUpdateSuccess }}</div>
 
         <div *ngIf="errorMessage" class="state-message error">{{ errorMessage }}</div>
 

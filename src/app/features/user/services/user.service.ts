@@ -4,6 +4,14 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { User, UserListResponse } from '../../../core/models/user.model';
 
+export type MaskingMode = 'mask' | 'shuffle' | 'fake' | 'noise';
+
+export interface SetMaskingModeResponse {
+    role: User['role'];
+    masking_mode: MaskingMode;
+    updated_at: string;
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -39,6 +47,13 @@ export class UserService {
 
     getDecryptedInfo(userId: number, password: string): Observable<User> {
         return this.http.post<User>(`${this.apiUrl}/${userId}/decrypt-info`, { password });
+    }
+
+    setGlobalMaskingMode(role: User['role'], maskingMode: MaskingMode): Observable<SetMaskingModeResponse> {
+        return this.http.patch<SetMaskingModeResponse>(`${this.apiUrl}/masking-mode`, {
+            role,
+            masking_mode: maskingMode
+        });
     }
 
     resetPassword(userId: number, newPassword: string): Observable<any> {
